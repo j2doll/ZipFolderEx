@@ -475,6 +475,8 @@ IFACEMETHODIMP ContextMenuExtractTo::QueryContextMenu(
     // Learn how to add sub-menu from:
     // http://www.codeproject.com/KB/shell/ctxextsubmenu.aspx
 	
+	// [1] intert 1st menu item
+
 	MENUITEMINFO mii = { sizeof(mii) };
 	mii.fMask = MIIM_STRING | MIIM_ID | MIIM_STATE | MIIM_BITMAP;
 	mii.wID = idCmdFirst + IDM_DISPLAY;
@@ -486,6 +488,8 @@ IFACEMETHODIMP ContextMenuExtractTo::QueryContextMenu(
 	{
 		return HRESULT_FROM_WIN32(GetLastError());
 	}
+
+	// [2] insert 2nd menu item
 
 	MENUITEMINFO mii2 = { sizeof(mii2) };
 	mii2.fMask = MIIM_STRING | MIIM_ID | MIIM_STATE | MIIM_BITMAP;

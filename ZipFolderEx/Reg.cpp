@@ -267,7 +267,7 @@ HRESULT RegisterShellExtContextMenuHandler(
     // is linked.
     if (*pszFileType == L'.')
     {
-        wchar_t szDefaultVal[260];
+        wchar_t szDefaultVal[MAX_PATH];
         hr = GetHKCRRegistryKeyAndValue(pszFileType, NULL, szDefaultVal, 
             sizeof(szDefaultVal));
 
