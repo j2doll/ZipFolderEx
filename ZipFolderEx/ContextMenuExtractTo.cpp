@@ -609,30 +609,31 @@ IFACEMETHODIMP ContextMenuExtractTo::InvokeCommand(LPCMINVOKECOMMANDINFO pici)
 				TCHAR DestPath[MAX_PATH];
 				StringCchCopy(DestPath, MAX_PATH, this->m_szSelectedFile);
 
-				::MessageBox(NULL, DestPath, _T("CAP1"), 0);
+				// ::MessageBox(NULL, DestPath, _T("CAP1"), 0);
 
-				// PathRemoveFileSpec(DestPath);
-				// UnZipFile(this->m_szSelectedFile, DestPath);
+				PathRemoveFileSpec(DestPath);
+				UnZipFile(this->m_szSelectedFile, DestPath);
 			}
 			else if (LOWORD(pici->lpVerb) == IDM_DISPLAY + 1)
 			{
 				TCHAR DestPath[MAX_PATH];
 				StringCchCopy(DestPath, MAX_PATH, this->m_szSelectedFile);
 
-				::MessageBox(NULL, DestPath, _T("CAP2"), 0);
+				// ::MessageBox(NULL, DestPath, _T("CAP2"), 0);
 
-				// PathRemoveExtension(DestPath);
+				PathRemoveExtension(DestPath);
 
-				// if (!PathFileExists(DestPath))
-				//	CreateDirectory(DestPath, NULL);
+				if (!PathFileExists(DestPath))
+					CreateDirectory(DestPath, NULL);
 
-				 // UnZipFile(this->m_szSelectedFile, DestPath);
+				 UnZipFile(this->m_szSelectedFile, DestPath);
 			}
 			else
 			{
 				// If the verb is not recognized by the context menu handler, it 
 				// must return E_FAIL to allow it to be passed on to the other 
 				// context menu handlers that might implement that verb.
+
 				return E_FAIL;
 			}
 		}
