@@ -43,7 +43,8 @@ extern long g_cDllRef;
 
 #define IDM_DISPLAY             0  // The command's identifier offset
 
-ContextMenuExtractTo::ContextMenuExtractTo(void) : m_cRef(1),
+ContextMenuExtractTo::ContextMenuExtractTo(void) :
+	m_cRef(1),
     m_pszMenuText(L"&Extract to"),
     m_pszVerb("cppdisplay"),
     m_pwszVerb(L"cppdisplay"),
@@ -54,13 +55,15 @@ ContextMenuExtractTo::ContextMenuExtractTo(void) : m_cRef(1),
 {
     InterlockedIncrement(&g_cDllRef);
 
-	HRESULT hr;
+	// HRESULT hr;
+	DWORD_PTR hr;
 	sfi = { 0 };
-	hr = SHGetFileInfo(L".zip",
-		FILE_ATTRIBUTE_NORMAL,
-		&sfi,
-		sizeof(sfi),
-		SHGFI_ICON | SHGFI_SMALLICON | SHGFI_USEFILEATTRIBUTES);
+	hr = SHGetFileInfo( // SHGetFileInfoA, SHGetFileInfoW(unicode)
+			L".zip",
+			FILE_ATTRIBUTE_NORMAL,
+			&sfi,
+			sizeof(sfi),
+			SHGFI_ICON | SHGFI_SMALLICON | SHGFI_USEFILEATTRIBUTES );
 
 	if (SUCCEEDED(hr))
 	{
@@ -70,6 +73,8 @@ ContextMenuExtractTo::ContextMenuExtractTo(void) : m_cRef(1),
 	ZeroMemory(&osvi, sizeof(OSVERSIONINFO));
 	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
 	GetVersionEx(&osvi);
+
+	// VerifyVersionInfo(&osvi, )
 }
 
 ContextMenuExtractTo::~ContextMenuExtractTo(void)
@@ -92,8 +97,12 @@ void ContextMenuExtractTo::UnZipFile(BSTR strSrc, BSTR strDest)
 
 	try
 	{
-		hResult = CoCreateInstance(CLSID_Shell, NULL, CLSCTX_INPROC_SERVER,
-			IID_IShellDispatch, (void **)&pIShellDispatch);
+		hResult = CoCreateInstance( CLSID_Shell,
+									NULL,
+									CLSCTX_INPROC_SERVER,
+									IID_IShellDispatch,
+									(void **)&pIShellDispatch );
+
 		if (SUCCEEDED(hResult))
 		{
 			VariantInit(&variantDir);
