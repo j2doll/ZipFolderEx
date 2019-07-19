@@ -36,6 +36,8 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 #include <comutil.h>
 #pragma comment( lib, "comsuppwd.lib")
 
+#include <tchar.h>
+
 extern HINSTANCE g_hInst;
 extern long g_cDllRef;
 
@@ -463,8 +465,7 @@ IFACEMETHODIMP ContextMenuExtractTo::QueryContextMenu(
     // Use either InsertMenu or InsertMenuItem to add menu items.
     // Learn how to add sub-menu from:
     // http://www.codeproject.com/KB/shell/ctxextsubmenu.aspx
-
-
+	
 	MENUITEMINFO mii = { sizeof(mii) };
 	mii.fMask = MIIM_STRING | MIIM_ID | MIIM_STATE | MIIM_BITMAP;
 	mii.wID = idCmdFirst + IDM_DISPLAY;
@@ -481,8 +482,7 @@ IFACEMETHODIMP ContextMenuExtractTo::QueryContextMenu(
 	mii2.fMask = MIIM_STRING | MIIM_ID | MIIM_STATE | MIIM_BITMAP;
 	mii2.wID = idCmdFirst + IDM_DISPLAY + 1;
 	if (osvi.dwMajorVersion < 6) mii2.fType = MFT_OWNERDRAW;
-
-	
+		
 	TCHAR extractTo[MAX_PATH] = L"Extract to \"";
 	TCHAR selectedFile[MAX_PATH] = L"";
 	StringCchCopy(selectedFile, MAX_PATH, this->m_szSelectedFile);
@@ -599,19 +599,25 @@ IFACEMETHODIMP ContextMenuExtractTo::InvokeCommand(LPCMINVOKECOMMANDINFO pici)
 			{
 				TCHAR DestPath[MAX_PATH];
 				StringCchCopy(DestPath, MAX_PATH, this->m_szSelectedFile);
-				PathRemoveFileSpec(DestPath);
-				UnZipFile(this->m_szSelectedFile, DestPath);
+
+				::MessageBox(NULL, DestPath, _T("CAP1"), 0);
+
+				// PathRemoveFileSpec(DestPath);
+				// UnZipFile(this->m_szSelectedFile, DestPath);
 			}
 			else if (LOWORD(pici->lpVerb) == IDM_DISPLAY + 1)
 			{
 				TCHAR DestPath[MAX_PATH];
 				StringCchCopy(DestPath, MAX_PATH, this->m_szSelectedFile);
-				PathRemoveExtension(DestPath);
 
-				if (!PathFileExists(DestPath))
-					CreateDirectory(DestPath, NULL);
+				::MessageBox(NULL, DestPath, _T("CAP2"), 0);
 
-				UnZipFile(this->m_szSelectedFile, DestPath);
+				// PathRemoveExtension(DestPath);
+
+				// if (!PathFileExists(DestPath))
+				//	CreateDirectory(DestPath, NULL);
+
+				 // UnZipFile(this->m_szSelectedFile, DestPath);
 			}
 			else
 			{

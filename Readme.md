@@ -23,7 +23,7 @@ References:
 Usage
 -------------------
 
-(Run cmd as Administrator)
+(**NOTICE**: Run cmd as **Administrator**)
 
 Registering and unregistering .DLL:
 
@@ -37,6 +37,11 @@ Note: After unregister the DLL, you might need to log off then log in to delete 
 
 Version History
 -------------------
+
+* v0.1 forked version (by j2doll)
+ 1. fixed  
+
 * v0.1 First working version
   1. Add "Extract Here" and "Extract to XXX" menu items in Shell Context Menu for Zip files.
   2. Use Zip file associated icon for these 2 menu items.
+

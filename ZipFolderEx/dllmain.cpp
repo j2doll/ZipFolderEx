@@ -32,13 +32,16 @@ WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
 #include "ClassFactory.h"           // For the class factory
 #include "Reg.h"
 
-
-// {2DAF224E-DDA2-4725-A3E7-E1DAE80A64EE}
 // When you write your own handler, you must create a new CLSID by using the 
 // "Create GUID" tool in the Tools menu, and specify the CLSID value here.
-const CLSID CLSID_FileContextMenuExt = 
-{ 0x2daf224e, 0xdda2, 0x4725, { 0xa3, 0xe7, 0xe1, 0xda, 0xe8, 0xa, 0x64, 0xee } };
 
+// {2DAF224E-DDA2-4725-A3E7-E1DAE80A64EE}
+// const CLSID CLSID_FileContextMenuExt = 
+// { 0x2daf224e, 0xdda2, 0x4725, { 0xa3, 0xe7, 0xe1, 0xda, 0xe8, 0xa, 0x64, 0xee } };
+
+// {294F55AE-16F6-4FDB-83CC-09991A11E66B}
+static const CLSID CLSID_FileContextMenuExt =
+ { 0x294f55ae, 0x16f6, 0x4fdb, { 0x83, 0xcc, 0x9, 0x99, 0x1a, 0x11, 0xe6, 0x6b } };
 
 
 HINSTANCE   g_hInst     = NULL;
